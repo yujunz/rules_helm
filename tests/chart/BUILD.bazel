@@ -1,0 +1,14 @@
+load("@com_github_yujunz_rules_helm//helm:def.bzl", "helm_chart")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+helm_chart(
+    name = "chart",
+    testonly = True,
+    srcs = [":all_files"],
+)
