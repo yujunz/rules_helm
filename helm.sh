@@ -25,16 +25,7 @@ fi
 # --- end runfiles.bash initialization ---
 #export RUNFILES_LIB_DEBUG=1
 
-platform=$(uname)
-if [ "$platform" == "Darwin" ]; then
-    BINARY=$(rlocation helm_osx/darwin-amd64/helm)
-elif [ "$platform" == "Linux" ]; then
-    BINARY=$(rlocation helm/linux-amd64/helm)
-else
-    echo "Helm does not have a binary for $platform"
-    exit 1
-fi
-
+BINARY=$(rlocation helm_cli/helm)
 export HELM_HOME="$(pwd)/.helm"
 export PATH="$(dirname $BINARY):$PATH"
 #export HELM_TILLER_SILENT=true
@@ -42,7 +33,7 @@ helm init --client-only >/dev/null
 # Remove local repo to increase reproducibility and remove errors
 helm repo list |grep -qc local && $BINARY repo remove local >/dev/null
 
-helm plugin list | grep -qc tiller || $BINARY plugin install $(dirname $(rlocation __main__/external/helm_tiller/WORKSPACE))
+helm plugin list | grep -qc tiller || $BINARY plugin install $(dirname $(rlocation helm_tiller/WORKSPACE))
 
 cd "${BUILD_WORKING_DIRECTORY:-}"
 helm $*

@@ -28,6 +28,6 @@ def helm_repositories():
         name = "helm_tiller",
         remote = "https://github.com/rimusz/helm-tiller",
         commit = "a77f505e062d8337e8fd638796bfecc8a4a00bcc",
-        shallow_since = "1553679518 +0000",
+        shallow_since = "1556633566 +0300",
         build_file = "@com_github_tmc_rules_helm//:helm.BUILD",
     )

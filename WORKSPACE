@@ -1,8 +1,19 @@
 workspace(name = "com_github_tmc_rules_helm")
 
 load(":repos.bzl", "helm_repositories")
-
 helm_repositories()
+
+local_repository(
+    name = "com_github_yujunz_rules_helm_external",
+    path = "../rules_helm_external"
+)
+load(
+  "@com_github_yujunz_rules_helm_external//helm:deps.bzl",
+  "helm_register_toolchains",
+  "helm_rules_dependencies",
+)
+helm_rules_dependencies()
+helm_register_toolchains()
 
 load("//tools:buildifier.bzl", "buildifier_repositories")
 buildifier_repositories()

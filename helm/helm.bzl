@@ -112,7 +112,7 @@ EXPLICIT_NAMESPACE=""" + namespace + """
 NAMESPACE=\$${EXPLICIT_NAMESPACE:-\$$NAMESPACE}
 export NS=\$${NAMESPACE:-\$${BUILD_USER}}
 if [ "\$$1" == "upgrade" ]; then
-    helm tiller run \$$NS -- helm \$$@ --namespace \$$NS """ + release_name + " " + set_params + " " + values_param + """ \$$CHARTLOC 
+    helm tiller run \$$NS -- helm \$$@ --namespace \$$NS """ + release_name + " " + set_params + " " + values_param + """ \$$CHARTLOC
 elif [ "\$$1" == "test" ]; then
     helm tiller run \$$NS -- helm test --cleanup """ + release_name + """
 else
